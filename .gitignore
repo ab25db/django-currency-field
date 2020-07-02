@@ -1,0 +1,15 @@
+env
+run
+dist
+build
+src/*
+.idea
+.tox
+.env
+.coverage
+
+*.egg-info
+*.swp
+*.pyc
+
+!currencyfield
