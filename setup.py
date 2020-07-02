@@ -5,7 +5,7 @@ import os
 from setuptools import find_packages, setup
 
 NAME = 'django_currency_field'
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 
 
 base_dir = os.path.dirname(__file__)
@@ -26,8 +26,8 @@ setup(
 	author='Daniel Bernal',
 	author_email='d@contemporary.io',
 	url='https://github.com/ab25db/django-currency-field',
-	package_dir={'': '.'},
-	packages=find_packages(where='.', exclude=[]),
+	package_dir={'': 'src'},
+	packages=find_packages(where='src', exclude=[]),
 	install_requires=install_requires,
 	python_requires='>=3.6',
 	classifiers=[
