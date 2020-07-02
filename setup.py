@@ -20,7 +20,7 @@ setup(
 	description='A Precision Bigint model field that avoids floats & decimals',
 	author='Daniel Bernal',
 	author_email='d@contemporary.io',
-	package_dir={'': 'src'},
+	package_dir={'': 'currencyfield'},
 	packages=find_packages(where='currencyfield', exclude=[]),
 	install_requires=install_requires,
 	python_requires='>=3.6',
