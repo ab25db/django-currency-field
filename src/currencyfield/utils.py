@@ -125,3 +125,6 @@ class Currency:
 
 	def __repr__(self):
 		return str(self.external_value)
+
+	def __bool__(self):
+		return self.value != 0
