@@ -14,4 +14,4 @@ class CurrencyField(BigIntegerField):
 		return super().get_prep_value(value)
 
 	def from_db_value(self, value, expression, connection):
-		return Currency(value)
+		return Currency(value) if value is not None else value

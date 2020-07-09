@@ -5,7 +5,7 @@ import os
 from setuptools import find_packages, setup
 
 NAME = 'django_currency_field'
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 
 
 base_dir = os.path.dirname(__file__)
