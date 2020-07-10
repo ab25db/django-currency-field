@@ -9,7 +9,17 @@ class Currency:
 	@property
 	def external_value(self):
 		val = self.value / self.internal_value_multiple
+		return round(val, 2)
+
+	@property
+	def external_value_unrounded(self):
+		val = self.value / self.internal_value_multiple
 		return val
+
+	@property
+	def external_value_decimal(self):
+		val = str(self.value / self.internal_value_multiple)
+		return Decimal(val)
 
 	def __init__(self, value, external_value=False, currency='USD'):
 		if currency not in self.internal_value_multiples:
@@ -18,8 +28,8 @@ class Currency:
 		if external_value is True:
 			self.value = self._to_internal_value(value)
 		else:
-			if not isinstance(value, int):
-				raise ValueError('if you are passing in a str or decimal value set external_value=True')
+			# if not isinstance(value, int):
+			# 	raise ValueError('if you are passing in a str or decimal value set external_value=True')
 			self.value = int(value)
 
 	@property
@@ -40,8 +50,10 @@ class Currency:
 			return other.value
 		elif isinstance(other, int):
 			return other
-		elif isinstance(other, (str, float, Decimal, )):
-			return Currency(other, external_value=True).value
+		elif isinstance(other, (str, float, )):
+			return Decimal(str(other))
+		elif isinstance(other, Decimal):
+			pass
 		return other
 
 	def __add__(self, other):
@@ -53,23 +65,23 @@ class Currency:
 		return self._clone(val)
 
 	def __mul__(self, other):
-		val = self.value * self._prep_other_value(other)
+		val = self.value * other
 		return self._clone(val)
 
 	def __truediv__(self, other):
-		val = self.value / self._prep_other_value(other)
+		val = self.value / other
 		return self._clone(val)
 
 	def __floordiv__(self, other):
-		val = self.value // self._prep_other_value(other)
+		val = self.value // other
 		return self._clone(val)
 
 	def __mod__(self, other):
-		val = self.value % self._prep_other_value(other)
+		val = self.value % other
 		return self._clone(val)
 
 	def __pow__(self, other):
-		val = self.value ** self._prep_other_value(other)
+		val = self.value ** other
 		return self._clone(val)
 
 	def __iadd__(self, other):
@@ -81,19 +93,19 @@ class Currency:
 		return self._clone(val)
 
 	def __imul__(self, other):
-		val = self.value * self._prep_other_value(other)
+		val = self.value * other
 		return self._clone(val)
 
 	def __idiv__(self, other):
-		val = self.value / self._prep_other_value(other)
+		val = self.value / other
 		return self._clone(val)
 
 	def __ifloordiv__(self, other):
-		val = self.value // self._prep_other_value(other)
+		val = self.value // other
 		return self._clone(val)
 
 	def __imod__(self, other):
-		val = self.value % self._prep_other_value(other)
+		val = self.value % other
 		return self._clone(val)
 
 	def __lt__(self, other):
