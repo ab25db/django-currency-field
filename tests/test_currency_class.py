@@ -69,3 +69,9 @@ class TestCurrencyClass:
 		total = Currency(0)
 		assert not total
 		assert not bool(total)
+
+	def test_negative(self):
+		refund_amount = Currency("-500.34", external_value=True)
+		assert refund_amount.value < 0
+		assert refund_amount.external_value < 0
+		assert refund_amount.external_value == -500.34
