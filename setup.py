@@ -5,13 +5,14 @@ import os
 from setuptools import find_packages, setup
 
 NAME = 'django_currency_field'
-VERSION = '0.1.6'
+VERSION = '0.1.7'
 
 
 base_dir = os.path.dirname(__file__)
 
 install_requires = [
-	'Django >= 3.0.1'
+	'Django >= 3.0.1',
+	'djangorestframework >= 3.11.0',
 ]
 with open("README.md", "r") as fh:
 	long_description = fh.read()
