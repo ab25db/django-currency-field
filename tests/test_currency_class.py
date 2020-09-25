@@ -2,7 +2,6 @@ import pytest
 from currencyfield.utils import Currency
 
 
-@pytest.mark.django_db
 class TestCurrencyClass:
 
 	def test_addition(self):
@@ -75,3 +74,13 @@ class TestCurrencyClass:
 		assert refund_amount.value < 0
 		assert refund_amount.external_value < 0
 		assert refund_amount.external_value == -500.34
+
+	# def test_small(self):
+	# 	val = Currency("0.0001", external_value=True)
+	# 	assert val.external_value == 0.0001
+	#
+	# 	val = Currency("0.001", external_value=True)
+	# 	assert val.external_value == 0.001
+	#
+	# 	val = Currency("0.01", external_value=True)
+	# 	assert val.external_value == 0.01

@@ -9,7 +9,15 @@ class Currency:
 	@property
 	def external_value(self):
 		val = self.value / self.internal_value_multiple
-		return round(val, 2)
+		if 0 < val < 0.0001:
+			val = round(val, 5)
+		elif 0 < val < 0.001:
+			val = round(val, 4)
+		elif 0 < val < 0.01:
+			val = round(val, 3)
+		else:
+			val = round(val, 2)
+		return val
 
 	@property
 	def external_value_unrounded(self):
