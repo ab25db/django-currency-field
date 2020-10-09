@@ -9,14 +9,15 @@ class Currency:
 	@property
 	def external_value(self):
 		val = self.value / self.internal_value_multiple
-		if 0 < val < 0.0001:
+		# if we have a low value float is most likely a price point so we have to override the decimal_places to show
+		if 0 < val < 0.0001 and self.decimal_places < 5:
 			val = round(val, 5)
-		elif 0 < val < 0.001:
+		elif 0 < val < 0.001 and self.decimal_places < 4:
 			val = round(val, 4)
-		elif 0 < val < 0.01:
+		elif 0 < val < 0.01 and self.decimal_places < 3:
 			val = round(val, 3)
 		else:
-			val = round(val, 2)
+			val = round(val, self.decimal_places)
 		return val
 
 	@property
@@ -29,16 +30,22 @@ class Currency:
 		val = str(self.value / self.internal_value_multiple)
 		return Decimal(val)
 
-	def __init__(self, value, external_value=False, currency='USD'):
+	def __init__(self, value, external_value=False, currency='USD', decimal_places=4):
 		if currency not in self.internal_value_multiples:
 			raise ValueError('currency does not have a internal value multiple setup')
+		assert isinstance(decimal_places, int)
 		self.currency = currency
+		self.decimal_places = decimal_places
 		if external_value is True:
 			self.value = self._to_internal_value(value)
 		else:
 			# if not isinstance(value, int):
 			# 	raise ValueError('if you are passing in a str or decimal value set external_value=True')
 			self.value = int(value)
+
+	def set_decimal_places(self, decimal_places):
+		assert isinstance(decimal_places, int)
+		self.decimal_places = decimal_places
 
 	@property
 	def internal_value_multiple(self):
@@ -148,3 +155,6 @@ class Currency:
 
 	def __bool__(self):
 		return self.value != 0
+
+
+a = Currency(1300)
