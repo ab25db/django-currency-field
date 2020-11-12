@@ -71,6 +71,13 @@ class Currency:
 			pass
 		return other
 
+	def round_up_to_cents(self):
+		if self.currency == "USD":
+			modulus_val = self.value % 1000
+			if modulus_val == 0:
+				return
+			self.value += (1000 - modulus_val)
+
 	def __add__(self, other):
 		val = self.value + self._prep_other_value(other)
 		return self._clone(val)
@@ -155,6 +162,3 @@ class Currency:
 
 	def __bool__(self):
 		return self.value != 0
-
-
-a = Currency(1300)
