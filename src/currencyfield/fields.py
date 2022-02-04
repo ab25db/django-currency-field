@@ -33,6 +33,8 @@ class CurrencySerializerField(DecimalField):
 			pass
 		elif isinstance(data, (int, str, float, Decimal)):
 			data = Currency(data, external_value=True)
+			# round up to the nearest cent to avoid being fractions of a cent short when paying a invoice
+			data.round_up_to_cents()
 		else:
 			raise ValueError(f'Invalid data type {type(data)} for CurrencySerializerField')
 		return data
