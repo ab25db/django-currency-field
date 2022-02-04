@@ -149,7 +149,7 @@ class Currency:
 		return self.value != self._prep_other_value(other)
 
 	def __int__(self):
-		raise self.value
+		return self.external_value
 
 	def __str__(self):
 		return str(self.external_value)
